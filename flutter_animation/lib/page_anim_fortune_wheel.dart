@@ -6,6 +6,7 @@ import 'package:linus_fortune_wheel/utils/click_util.dart';
 import 'package:linus_fortune_wheel/utils/ui_util.dart';
 import 'package:linus_fortune_wheel/utils/widget_util.dart';
 import 'package:linus_fortune_wheel/widget/widget_button.dart';
+import 'package:linus_fortune_wheel/widget/widget_button_spin.dart';
 
 class PageAnimFortuneWheel extends StatefulWidget {
   const PageAnimFortuneWheel({Key? key}) : super(key: key);
@@ -15,6 +16,9 @@ class PageAnimFortuneWheel extends StatefulWidget {
 }
 
 class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
+
+  GlobalKey<WidgetButtonSpinState> spinKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +29,7 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
           _getBackgroundImage(),
           _getAppBarView(),
           _getMainContentView(),
+          //Positioned()
         ],
       )
     );
@@ -88,26 +93,77 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
     return Stack(
       alignment: Alignment.topCenter,
       children: [
-        // Positioned(
-        //   bottom: UiUtils.getRealWidthByDesign(20) + UiUtils.bottomBarHeight,
-        //   child: ButtonSpinWidget(
-        //     key: spinKey,
-        //     showClick: (value) {
-        //       showKey.currentState?.onSetState(value);
-        //     },
-        //     onTap: (value) async {
-        //       if (value) {
-        //         checkSpinCoins(size: 0);
-        //       } else {
-        //         stopSpinButton();
-        //       }
-        //     },
-        //   ),
-        // ),
+        _getSettingsBackgroundView(),
+        //VISIBILEWIDGET
+        _getPlayButtonView(),
       ],
     );
   }
 
+
+  Column _getSettingsBackgroundView() {
+    return Column(
+      children: [
+        Stack(
+          children: [
+            _getBgLightView(),
+            _getSettingsMainBgView(),
+
+          ],
+        ),
+        Expanded(
+          child: Center(),
+        ),
+        Stack()
+      ],
+    );
+  }
+
+  Padding _getBgLightView() {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(36),
+      ),
+      child: Image.asset(AppRes.IC_LUCKY_BG_LIGHT,
+        fit: BoxFit.fitWidth,
+        width: UiUtils.screenWidth,
+        height: UiUtils.getRealWidthByDesign(210),
+      ),
+    );
+  }
+
+  Positioned _getSettingsMainBgView() {
+    return Positioned(
+      left: 0,
+      right: 0,
+      top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(36),
+      child: Image.asset(AppRes.IC_LUCKY_SETTINGS_MAIN_BG,
+        width: UiUtils.screenWidth,
+        height: UiUtils.getRealWidthByDesign(170),
+      ),
+    );
+  }
+
+  Positioned _getPlayButtonView() {
+    return Positioned(
+      bottom: UiUtils.getRealWidthByDesign(20) + UiUtils.bottomBarHeight,
+      child: WidgetButtonSpin(
+        key: spinKey,
+        showClick: (value) {
+          // showKey.currentState?.onSetState(value);
+        },
+        onTap: (value) async {
+          if (value) {
+            Fluttertoast.showToast(msg: "TODO check condition to play");
+            // checkSpinCoins(size: 0);
+          } else {
+            Fluttertoast.showToast(msg: "TODO, stop play");
+            // stopSpinButton();
+          }
+        },
+      ),
+    );
+  }
 
   void _showRuleBottomSheet() async {
     Fluttertoast.showToast(msg: "TODO, show info bottom sheet");
