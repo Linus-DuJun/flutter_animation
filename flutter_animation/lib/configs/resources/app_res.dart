@@ -2,6 +2,7 @@ class AppRes {
   static const _IMAGES = "assets/images/";
   static const _MUSICS = "files/musics/";
   static const _FLARES = "files/flare/";
+  static const _LOTTIE = "files/lotties/";
   static const _SVGA = "files/svga/";
 
   //IMAGES
@@ -16,6 +17,8 @@ class AppRes {
   static const IC_LUCKY_BUY_NORMAL = _IMAGES + "lucky_buy.png";
   static const IC_LUCKY_BUY_PRESSED = _IMAGES + "lucky_buy_click.png";
 
+  // Lottie anim
+  static const LOTTIE_WIN_BACKGROUND = _LOTTIE + "win_bg/win_bg.json";
 
   // Flare anim
   static const FLARE_LUCK_GAME_BG = _FLARES + "lucky_game_bg.flr";

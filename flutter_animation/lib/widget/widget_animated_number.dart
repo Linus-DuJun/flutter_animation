@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 /// 数字递增变化
-class WidgetNumberRun extends StatefulWidget {
+class WidgetAnimatedNumber extends StatefulWidget {
   final int number;
   final TextStyle style;
   final TextOverflow overflow;
 
-  const WidgetNumberRun({
+  const WidgetAnimatedNumber({
     Key? key,
     required this.number,
     required this.style,
@@ -14,10 +14,10 @@ class WidgetNumberRun extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  WidgetNumberRunState createState() => WidgetNumberRunState();
+  _WidgetAnimatedNumberState createState() => _WidgetAnimatedNumberState();
 }
 
-class WidgetNumberRunState extends State<WidgetNumberRun>
+class _WidgetAnimatedNumberState extends State<WidgetAnimatedNumber>
   with SingleTickerProviderStateMixin {
 
   late AnimationController _controller;
@@ -39,8 +39,9 @@ class WidgetNumberRunState extends State<WidgetNumberRun>
   }
 
   @override
-  void didUpdateWidget(covariant WidgetNumberRun oldWidget) {
+  void didUpdateWidget(covariant WidgetAnimatedNumber oldWidget) {
     super.didUpdateWidget(oldWidget);
+    print("didUpdateWidget, number is $number, but widget number is ${widget.number}");
     if (!mounted) return;
     if (number != widget.number) {
       _controller.reset();

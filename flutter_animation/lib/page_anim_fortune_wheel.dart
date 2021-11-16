@@ -11,9 +11,10 @@ import 'package:linus_fortune_wheel/utils/widget_util.dart';
 import 'package:linus_fortune_wheel/widget/widget_button.dart';
 import 'package:linus_fortune_wheel/widget/widget_button_spin.dart';
 import 'package:linus_fortune_wheel/widget/widget_flare.dart';
-import 'package:linus_fortune_wheel/widget/widget_number_run.dart';
+import 'package:linus_fortune_wheel/widget/widget_animated_number.dart';
 import 'package:linus_fortune_wheel/widget/widget_number_text.dart';
 import 'package:linus_fortune_wheel/widget/widget_press_stateful_button.dart';
+import 'package:lottie/lottie.dart';
 
 class PageAnimFortuneWheel extends StatefulWidget {
   const PageAnimFortuneWheel({Key? key}) : super(key: key);
@@ -120,7 +121,8 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
           children: [
             _getSettingsBackgroundView(),
             Expanded(child: _getFlaresView(),),
-            SizedBox(height: 300,)
+            _getResultAreaView(),
+            // SizedBox(height: 300,)
           ],
         ),
 
@@ -130,6 +132,28 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
     );
   }
 
+  // 抽奖结果区域UI
+  Stack _getResultAreaView() {
+    return Stack(
+      alignment: Alignment.topCenter,
+      clipBehavior: Clip.none,
+      children: [
+        _getWinGameBgLottieAnim()
+      ],
+    );
+  }
+
+  Positioned _getWinGameBgLottieAnim() {
+    return Positioned(
+      top: UiUtils.getRealWidthByDesign(5),
+      left: 0,
+      right: 0,
+      child: Lottie.asset(AppRes.LOTTIE_WIN_BACKGROUND,
+        width: UiUtils.getRealWidthByDesign(250),
+        height: UiUtils.getRealWidthByDesign(50)
+      ),
+    );
+  }
 
   Center _getFlaresView() {
     return Center(

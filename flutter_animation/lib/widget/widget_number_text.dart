@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:linus_fortune_wheel/widget/widget_number_run.dart';
+import 'package:linus_fortune_wheel/widget/widget_animated_number.dart';
 
 //封装文本组件的widget，局部刷新
 class WidgetNumberText extends StatefulWidget {
@@ -33,7 +33,7 @@ class WidgetNumberTextState extends State<WidgetNumberText> {
 
   @override
   Widget build(BuildContext context) {
-    return WidgetNumberRun(
+    return WidgetAnimatedNumber(
         number: number,
         style: widget.numberStyle);
   }
