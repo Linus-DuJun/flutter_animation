@@ -7,6 +7,7 @@ import 'package:linus_fortune_wheel/utils/ui_util.dart';
 import 'package:linus_fortune_wheel/utils/widget_util.dart';
 import 'package:linus_fortune_wheel/widget/widget_button.dart';
 import 'package:linus_fortune_wheel/widget/widget_button_spin.dart';
+import 'package:linus_fortune_wheel/widget/widget_flare.dart';
 
 class PageAnimFortuneWheel extends StatefulWidget {
   const PageAnimFortuneWheel({Key? key}) : super(key: key);
@@ -17,6 +18,20 @@ class PageAnimFortuneWheel extends StatefulWidget {
 
 class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
 
+  static const ANIM_NAME_SLOW_RUN = "slowRun";
+  static const ANIM_NAME_FAST_RUN = "fastRun";
+  static const ANIM_NAME_SLOW_CUT = "slowCut";
+  static const ANIM_NAME_FAST_CUT = "fastCut";
+  static const ANIM_NAME_SLOW_FLASH = "slowFlash";
+  static const ANIM_NAME_FAST_FLASH = "fastFlash";
+  static const ANIM_ITEM_STATUS_START = "start";
+  static const ANIM_ITEM_STATUS_ING = "ing";
+  static const ANIM_ITEM_STATUS_END = "end";
+
+  GlobalKey<WidgetFlareState> flareGameKey = GlobalKey();
+  GlobalKey<WidgetFlareState> flareItemKey1 = GlobalKey();
+  GlobalKey<WidgetFlareState> flareItemKey2 = GlobalKey();
+  GlobalKey<WidgetFlareState> flareItemKey3 = GlobalKey();
   GlobalKey<WidgetButtonSpinState> spinKey = GlobalKey();
 
   @override
@@ -27,8 +42,8 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
         alignment: Alignment.topCenter,
         children: [
           _getBackgroundImage(),
-          _getAppBarView(),
           _getMainContentView(),
+          _getAppBarView(),
           //Positioned()
         ],
       )
@@ -93,7 +108,14 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
     return Stack(
       alignment: Alignment.topCenter,
       children: [
-        _getSettingsBackgroundView(),
+        Column(
+          children: [
+            _getSettingsBackgroundView(),
+            Expanded(child: _getFlaresView(),),
+            SizedBox(height: 300,)
+          ],
+        ),
+
         //VISIBILEWIDGET
         _getPlayButtonView(),
       ],
@@ -101,20 +123,109 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
   }
 
 
-  Column _getSettingsBackgroundView() {
-    return Column(
+  Center _getFlaresView() {
+    return Center(
+        child: SizedBox(
+          width: double.infinity,
+          height: UiUtils.getRealWidthByDesign(220),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              _getFlareMainBg(),
+              _getLeftFlareItem(),
+              _getCenterFlareItem(),
+              _getRightFlareItem(),
+            ],
+          ),
+        )
+    );
+  }
+
+  WidgetFlare _getFlareMainBg() {
+    return  WidgetFlare(
+      key: flareGameKey,
+      fileName: AppRes.FLARE_LUCK_GAME_BG,
+      animName: ANIM_NAME_SLOW_RUN,
+      callback: (String name) {
+        if (name == ANIM_NAME_SLOW_RUN) {
+          flareGameKey.currentState?.setAnimName(ANIM_NAME_SLOW_FLASH);
+        } else if (name == ANIM_NAME_SLOW_FLASH) {
+          flareGameKey.currentState?.setAnimName(ANIM_NAME_SLOW_CUT);
+        } else if (name == ANIM_NAME_FAST_FLASH) {
+          flareGameKey.currentState?.setAnimName(ANIM_NAME_FAST_CUT);
+        }
+      },
+    );
+  }
+
+  Positioned _getLeftFlareItem() {
+    return Positioned(
+      top: UiUtils.getRealWidthByDesign(30),
+      left: UiUtils.getRealWidthByDesign(60),
+      width: UiUtils.getRealWidthByDesign(75),
+      height: UiUtils.getRealWidthByDesign(150),
+      child: WidgetFlare(
+        key: flareItemKey1,
+        fileName: AppRes.FLARE_LUCK_GAME_ITEM,
+        animName: ANIM_ITEM_STATUS_START,
+        isPaused: true,
+        callback: (String name) {
+          if (name == ANIM_ITEM_STATUS_START) {
+            flareItemKey1.currentState?.setAnimName(ANIM_ITEM_STATUS_ING);
+          }
+        },
+      ),
+    );
+  }
+
+  Positioned _getCenterFlareItem() {
+    return Positioned(
+      top: UiUtils.getRealWidthByDesign(30),
+      width: UiUtils.getRealWidthByDesign(75),
+      height: UiUtils.getRealWidthByDesign(150),
+      child: WidgetFlare(
+        key: flareItemKey2,
+        fileName: AppRes.FLARE_LUCK_GAME_ITEM,
+        animName: ANIM_ITEM_STATUS_START,
+        isPaused: true,
+        callback: (String name) {
+          if (name == ANIM_ITEM_STATUS_START) {
+            flareItemKey2.currentState?.setAnimName(ANIM_ITEM_STATUS_ING);
+          }
+        },
+      ),
+    );
+  }
+
+  Positioned _getRightFlareItem() {
+    return Positioned(
+      top: UiUtils.getRealWidthByDesign(30),
+      right: UiUtils.getRealWidthByDesign(60),
+      width: UiUtils.getRealWidthByDesign(75),
+      height: UiUtils.getRealWidthByDesign(150),
+      child: WidgetFlare(
+        key: flareItemKey3,
+        fileName: AppRes.FLARE_LUCK_GAME_ITEM,
+        animName: ANIM_ITEM_STATUS_START,
+        isPaused: true,
+        callback: (String name) {
+          if (name == ANIM_ITEM_STATUS_START) {
+            flareItemKey3.currentState?.setAnimName(ANIM_ITEM_STATUS_ING);
+          }
+        },
+      ),
+    );
+  }
+
+  Stack _getSettingsBackgroundView() {
+    return Stack(
       children: [
         Stack(
           children: [
             _getBgLightView(),
             _getSettingsMainBgView(),
-
           ],
         ),
-        Expanded(
-          child: Center(),
-        ),
-        Stack()
       ],
     );
   }
@@ -122,7 +233,7 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
   Padding _getBgLightView() {
     return Padding(
       padding: EdgeInsets.only(
-        top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(36),
+        top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(8),
       ),
       child: Image.asset(AppRes.IC_LUCKY_BG_LIGHT,
         fit: BoxFit.fitWidth,
@@ -136,7 +247,7 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
     return Positioned(
       left: 0,
       right: 0,
-      top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(36),
+      top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(8),
       child: Image.asset(AppRes.IC_LUCKY_SETTINGS_MAIN_BG,
         width: UiUtils.screenWidth,
         height: UiUtils.getRealWidthByDesign(170),

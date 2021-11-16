@@ -4,12 +4,6 @@ class AppRes {
   static const _FLARES = "files/flare/";
   static const _SVGA = "files/svga/";
 
-  //Music files
-  static const FILE_MUSIC_LUCKY_BG = _MUSICS + "lucky_bg.mp3";
-  static const FILE_MUSIC_LUCKY_COINS = _MUSICS + "lucky_coins.mp3";
-  static const FILE_MUSIC_LUCKY_STOP = _MUSICS + "lucky_stop.mp3";
-
-
   //IMAGES
   static const IC_BACK = _IMAGES + "app_return.png";
   static const IC_LUCK_INFO = _IMAGES + "lucky_info.png";
@@ -23,4 +17,9 @@ class AppRes {
   // Flare anim
   static const FLARE_LUCK_GAME_BG = _FLARES + "lucky_game_bg.flr";
   static const FLARE_LUCK_GAME_ITEM = _FLARES + "lucky_game_item.flr";
+
+  // Musics
+  static const AUDIO_LUCKY_BG = "lucky_bg.mp3";
+  static const AUDIO_LUCKY_COINS = _MUSICS + "lucky_coins.mp3";
+  static const AUDIO_LUCKY_STOP = _MUSICS + "lucky_stop.mp3";
 }
