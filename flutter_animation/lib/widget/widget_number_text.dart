@@ -7,7 +7,7 @@ class WidgetNumberText extends StatefulWidget {
   final TextStyle numberStyle;
   final TextOverflow overflow;
   const WidgetNumberText({
-    required Key key,
+    Key? key,
     required this.number,
     required this.numberStyle,
     this.overflow = TextOverflow.ellipsis

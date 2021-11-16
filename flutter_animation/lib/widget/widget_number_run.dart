@@ -14,10 +14,10 @@ class WidgetNumberRun extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _WidgetNumberRunState createState() => _WidgetNumberRunState();
+  WidgetNumberRunState createState() => WidgetNumberRunState();
 }
 
-class _WidgetNumberRunState extends State<WidgetNumberRun>
+class WidgetNumberRunState extends State<WidgetNumberRun>
   with SingleTickerProviderStateMixin {
 
   late AnimationController _controller;

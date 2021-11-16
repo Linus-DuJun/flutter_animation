@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'dart:ui' as UI;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linus_fortune_wheel/configs/resources/app_res.dart';
 import 'package:linus_fortune_wheel/configs/styles/app_text_styles.dart';
@@ -8,6 +11,9 @@ import 'package:linus_fortune_wheel/utils/widget_util.dart';
 import 'package:linus_fortune_wheel/widget/widget_button.dart';
 import 'package:linus_fortune_wheel/widget/widget_button_spin.dart';
 import 'package:linus_fortune_wheel/widget/widget_flare.dart';
+import 'package:linus_fortune_wheel/widget/widget_number_run.dart';
+import 'package:linus_fortune_wheel/widget/widget_number_text.dart';
+import 'package:linus_fortune_wheel/widget/widget_press_stateful_button.dart';
 
 class PageAnimFortuneWheel extends StatefulWidget {
   const PageAnimFortuneWheel({Key? key}) : super(key: key);
@@ -32,7 +38,9 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
   GlobalKey<WidgetFlareState> flareItemKey1 = GlobalKey();
   GlobalKey<WidgetFlareState> flareItemKey2 = GlobalKey();
   GlobalKey<WidgetFlareState> flareItemKey3 = GlobalKey();
+  GlobalKey<WidgetNumberTextState> moneyKey = GlobalKey();
   GlobalKey<WidgetButtonSpinState> spinKey = GlobalKey();
+  GlobalKey<WidgetPressStatefulButtonState> buttonBuyKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -224,6 +232,7 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
           children: [
             _getBgLightView(),
             _getSettingsMainBgView(),
+            _getAccountMoneyInfoView()
           ],
         ),
       ],
@@ -233,7 +242,7 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
   Padding _getBgLightView() {
     return Padding(
       padding: EdgeInsets.only(
-        top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(8),
+        top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(10),
       ),
       child: Image.asset(AppRes.IC_LUCKY_BG_LIGHT,
         fit: BoxFit.fitWidth,
@@ -247,12 +256,81 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
     return Positioned(
       left: 0,
       right: 0,
-      top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(8),
+      top: UiUtils.statusBarHeight + UiUtils.getRealWidthByDesign(14),
       child: Image.asset(AppRes.IC_LUCKY_SETTINGS_MAIN_BG,
         width: UiUtils.screenWidth,
         height: UiUtils.getRealWidthByDesign(170),
       ),
     );
+  }
+
+  Positioned _getAccountMoneyInfoView() {
+    return Positioned(
+      left: 0,
+      right: 0,
+      bottom: 0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(AppRes.IC_LUCKY_MAIN_COINS,
+                width: UiUtils.getRealWidthByDesign(164),
+                height: UiUtils.getRealWidthByDesign(44),
+              ),
+              Positioned(
+                left: UiUtils.getRealWidthByDesign(54),
+                right: UiUtils.getRealWidthByDesign(4),
+                child: WidgetNumberText(
+                  key: moneyKey,
+                  number: 5, // TODO use real account money number
+                  numberStyle: AppTextStyles.pt16WhiteBold.copyWith(
+                    fontSize: 22,
+                    foreground: Paint()..shader = _getMoneyNumberShader()
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(width: UiUtils.getRealWidthByDesign(6),),
+          WidgetPressStatefulButton(
+              normalStateImage: AppRes.IC_LUCKY_BUY_NORMAL,
+              pressedStateImage: AppRes.IC_LUCKY_BUY_PRESSED,
+              unpressedStateImage: AppRes.IC_LUCKY_BUY_NORMAL,
+              width: UiUtils.getRealWidthByDesign(90),
+              height: UiUtils.getRealWidthByDesign(44),
+              key: buttonBuyKey,
+              top: UiUtils.getRealWidthByDesign(8),
+              top2: UiUtils.getRealWidthByDesign(12),
+              child: Text("BUY",
+                style: AppTextStyles.pt16WhiteBold.copyWith(
+                  fontSize: 18,
+                  foreground: Paint()
+                    ..style = PaintingStyle.stroke
+                    ..strokeWidth = 3
+                    ..color = Color(0xFFFF4589)
+                ),
+              ),
+              child2: Text("BUY",
+                style: AppTextStyles.pt16WhiteBold.copyWith(
+                  fontSize: 18
+                ),
+              ),
+              onTap: () {
+                moneyKey.currentState?.onSetState(Random().nextInt(1000));
+              },
+          )
+        ],
+      ),
+    );
+  }
+
+  Shader _getMoneyNumberShader() {
+    final from = Offset(0, 20);
+    final to = Offset(100, 20);
+    final colors = [Color(0xFFFEFFC8), Color(0xFFFFED21)];
+    return UI.Gradient.linear(from, to, colors);
   }
 
   Positioned _getPlayButtonView() {

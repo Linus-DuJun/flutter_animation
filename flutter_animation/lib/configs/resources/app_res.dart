@@ -12,6 +12,9 @@ class AppRes {
   static const IC_LUCK_SPIN_CLICK = _IMAGES + "lucky_spin_click.png";
   static const IC_LUCKY_BG_LIGHT = _IMAGES + "lucky_bg_light.png";
   static const IC_LUCKY_SETTINGS_MAIN_BG = _IMAGES + "lucky_main_bg.png";
+  static const IC_LUCKY_MAIN_COINS = _IMAGES + "lucky_coins.png";
+  static const IC_LUCKY_BUY_NORMAL = _IMAGES + "lucky_buy.png";
+  static const IC_LUCKY_BUY_PRESSED = _IMAGES + "lucky_buy_click.png";
 
 
   // Flare anim
