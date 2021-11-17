@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:linus_fortune_wheel/utils/click_util.dart';
 
 class GradientElevatedButton extends StatelessWidget {
-  final Function callback;
+  final VoidCallback callback;
   final String label;
   final TextStyle labelStyle;
   final List<Color> gradientColors;

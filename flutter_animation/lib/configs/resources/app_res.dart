@@ -19,6 +19,11 @@ class AppRes {
 
   // Lottie anim
   static const LOTTIE_WIN_BACKGROUND = _LOTTIE + "win_bg/win_bg.json";
+  static const LOTTIE_WIN = _LOTTIE + "win/win.json";
+  static const LOTTIE_WIN_BIG = _LOTTIE + "win_big/win_big.json";
+  static const LOTTIE_LUCKY_SPIN = _LOTTIE + "lucky_spin/lucky_spin.json";
+  static const LOTTIE_LUCKY_NUMBER = _LOTTIE + "lucky_number/lucky_number.json";
+  static const LOTTIE_GET_COIN = _LOTTIE + "get_coins/get_coins.json";
 
   // Flare anim
   static const FLARE_LUCK_GAME_BG = _FLARES + "lucky_game_bg.flr";

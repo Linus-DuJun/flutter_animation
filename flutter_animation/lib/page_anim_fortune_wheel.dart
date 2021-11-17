@@ -121,7 +121,7 @@ class _PageAnimFortuneWheelState extends State<PageAnimFortuneWheel> {
           children: [
             _getSettingsBackgroundView(),
             Expanded(child: _getFlaresView(),),
-            _getResultAreaView(),
+            // _getResultAreaView(),
             // SizedBox(height: 300,)
           ],
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:linus_fortune_wheel/page_anim_fortune_wheel.dart';
 import 'package:linus_fortune_wheel/page_code_fortune_wheel.dart';
 import 'package:linus_fortune_wheel/page_flare_animations.dart';
+import 'package:linus_fortune_wheel/page_lottie_animation.dart';
 import 'package:linus_fortune_wheel/page_svga_animations.dart';
 import 'package:linus_fortune_wheel/page_test_snippet.dart';
 import 'package:linus_fortune_wheel/utils/ui_util.dart';
@@ -68,6 +69,12 @@ class _MyHomePageState extends State<MyHomePage> {
               gradientColors: [Colors.greenAccent, Colors.lightGreenAccent]),
           UiUtils.getVerticalSizedBox(16),
           GradientElevatedButton(
+              callback: _goToLottieAnimations,
+              label: "Lottie animations",
+              labelStyle: _getButtonTextStyle(),
+              gradientColors: [Colors.greenAccent, Colors.lightGreenAccent]),
+          UiUtils.getVerticalSizedBox(16),
+          GradientElevatedButton(
               callback: _goToTestPage,
               label: "Test",
               labelStyle: _getButtonTextStyle(),
@@ -75,6 +82,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  void _goToLottieAnimations() {
+     Navigator.of(context).push(
+       MaterialPageRoute(builder: (_) => PageLottieAnimation())
+     );
   }
 
   void _goToFlareAnimations() {

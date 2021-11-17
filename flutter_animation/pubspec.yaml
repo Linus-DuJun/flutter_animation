@@ -37,9 +37,18 @@ flutter:
     - files/flare/
     - assets/images/
     - files/lotties/
-    - files/lotties/win_bg
-    - files/lotties/win_bg/images
-
+    - files/lotties/win_bg/images/
+    - files/lotties/win_bg/
+    - files/lotties/win/images/
+    - files/lotties/win/
+    - files/lotties/win_big/images/
+    - files/lotties/win_big/
+    - files/lotties/get_coins/images/
+    - files/lotties/get_coins/
+    - files/lotties/lucky_number/images/
+    - files/lotties/lucky_number/
+    - files/lotties/lucky_spin/images/
+    - files/lotties/lucky_spin/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
