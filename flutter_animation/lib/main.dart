@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:linus_fortune_wheel/animations/implicit_animations/page_implicit_anim_index.dart';
 import 'package:linus_fortune_wheel/page_anim_fortune_wheel.dart';
 import 'package:linus_fortune_wheel/page_code_fortune_wheel.dart';
 import 'package:linus_fortune_wheel/page_flare_animations.dart';
@@ -45,6 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GradientElevatedButton(
+              callback: _goToImplicitAnimIndexPage,
+              label: "Implicit Animation",
+              labelStyle: _getButtonTextStyle(),
+              gradientColors: [Colors.tealAccent, Colors.teal]),
+          const SizedBox(height: 16,),
+          GradientElevatedButton(
               callback: _goToCodeWheelPage,
               label: "Code Fortune Wheel",
               labelStyle: _getButtonTextStyle(),
@@ -81,6 +88,12 @@ class _MyHomePageState extends State<MyHomePage> {
               gradientColors: [Colors.amberAccent, Colors.tealAccent]),
         ],
       ),
+    );
+  }
+
+  void _goToImplicitAnimIndexPage() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => PageImplicitAnimIndex())
     );
   }
 

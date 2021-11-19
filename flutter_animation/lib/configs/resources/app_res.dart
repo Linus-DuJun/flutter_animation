@@ -6,6 +6,7 @@ class AppRes {
   static const _SVGA = "files/svga/";
 
   //IMAGES
+  static const IMG_DEMO_USAGE = _IMAGES + "img_bz.jpg";
   static const IC_BACK = _IMAGES + "app_return.png";
   static const IC_LUCK_INFO = _IMAGES + "lucky_info.png";
   static const IC_LUCK_SPIN = _IMAGES + "lucky_spin.png";
