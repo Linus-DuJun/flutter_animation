@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:linus_fortune_wheel/animations/implicit_animations/page_implicit_anim_index.dart';
+import 'package:linus_fortune_wheel/code_img_fortune_wheel/page_code_img_fortune_wheel.dart';
 import 'package:linus_fortune_wheel/page_anim_fortune_wheel.dart';
 import 'package:linus_fortune_wheel/page_code_fortune_wheel.dart';
 import 'package:linus_fortune_wheel/page_flare_animations.dart';
@@ -42,14 +43,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
         children: [
+          SizedBox(height: 32,),
           GradientElevatedButton(
               callback: _goToImplicitAnimIndexPage,
               label: "Implicit Animation",
               labelStyle: _getButtonTextStyle(),
               gradientColors: [Colors.tealAccent, Colors.teal]),
+          const SizedBox(height: 16,),
+          GradientElevatedButton(
+              callback: _goToCodeAndImageFortuneWheel,
+              label: "Code&Image Fortune Wheel",
+              labelStyle: _getButtonTextStyle(),
+              gradientColors: [Colors.amberAccent, Colors.tealAccent]),
           const SizedBox(height: 16,),
           GradientElevatedButton(
               callback: _goToCodeWheelPage,
@@ -106,6 +113,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _goToFlareAnimations() {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => PageFlareAnimations())
+    );
+  }
+
+  void _goToCodeAndImageFortuneWheel() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => PageCodeImgFortuneWheel())
     );
   }
 
