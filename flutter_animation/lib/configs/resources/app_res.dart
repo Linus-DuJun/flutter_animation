@@ -7,6 +7,9 @@ class AppRes {
 
   //IMAGES
   static const IMG_DEMO_USAGE = _IMAGES + "img_bz.jpg";
+  static const IMG_WHEEL_BG = _IMAGES + "img_wheel_bg.png";
+  static const IMG_WHEEL_INDICATOR = _IMAGES + "img_lottery_indicator.png";
+  static const IMG_LOTTERY_BG = _IMAGES + "ic_lottery_bg.png";
   static const IC_BACK = _IMAGES + "app_return.png";
   static const IC_LUCK_INFO = _IMAGES + "lucky_info.png";
   static const IC_LUCK_SPIN = _IMAGES + "lucky_spin.png";

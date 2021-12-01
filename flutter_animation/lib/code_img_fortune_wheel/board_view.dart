@@ -2,6 +2,7 @@ import 'dart:math' as Math;
 import 'package:flutter/material.dart';
 import 'package:linus_fortune_wheel/code_img_fortune_wheel/arrow_view.dart';
 import 'package:linus_fortune_wheel/code_img_fortune_wheel/luck_model.dart';
+import 'package:linus_fortune_wheel/configs/resources/app_res.dart';
 
 class BoardView extends StatefulWidget {
   final double angle;
@@ -20,8 +21,8 @@ class BoardView extends StatefulWidget {
 }
 
 class _BoardViewState extends State<BoardView> {
-  Size get size => Size(MediaQuery.of(context).size.width - 16,
-      MediaQuery.of(context).size.width - 16);
+  Size get size => Size(MediaQuery.of(context).size.width - 32,
+      MediaQuery.of(context).size.width - 32);
 
   double _rotate(int index) => (index / widget.items.length) * 2 * Math.pi;
 
@@ -30,15 +31,20 @@ class _BoardViewState extends State<BoardView> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Container(
-          height: size.height,
-          width: size.width,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(blurRadius: 20, color: Colors.black38)
-            ]
-          ),
+        // Container(
+        //   height: size.height,
+        //   width: size.width,
+        //   decoration: BoxDecoration(
+        //     shape: BoxShape.circle,
+        //     boxShadow: [
+        //       BoxShadow(blurRadius: 20, color: Colors.black38)
+        //     ]
+        //   ),
+        // ),
+        Image.asset(AppRes.IMG_WHEEL_BG,
+          width: size.width + 24,
+          height: size.height + 24,
+          fit: BoxFit.cover,
         ),
         Transform.rotate(
           angle: -(widget.current + widget.angle) * 2 * Math.pi,
@@ -50,11 +56,6 @@ class _BoardViewState extends State<BoardView> {
             ],
           ),
         ),
-        Container(
-          height: size.height,
-          width: size.width,
-          child: ArrowView(),
-        )
       ],
     );
   }
@@ -71,10 +72,9 @@ class _BoardViewState extends State<BoardView> {
           height: size.height,
           width: size.width,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [luck.color, luck.color.withOpacity(0)]
+            gradient: RadialGradient(
+              stops: [0.2, 1],
+              colors: [Color(0xFFE6B156), Color(0xFF6B4E2B),]
             )
           ),
         ),
@@ -83,6 +83,7 @@ class _BoardViewState extends State<BoardView> {
   }
 
   _buildImage(LuckModel luck) {
+    final index = widget.items.indexOf(luck);
     var rotate = _rotate(widget.items.indexOf(luck));
     return Transform.rotate(
       angle: rotate,
@@ -95,7 +96,14 @@ class _BoardViewState extends State<BoardView> {
             height: size.height / 3,
             width: 48
           ),
-          child: Image.asset(luck.asset),
+          child: Column(
+            children: [
+              SizedBox(height: 16,),
+              Image.asset(luck.asset),
+              SizedBox(height: 16,),
+              Text("$index等奖")
+            ],
+          ),
         ),
       ),
     );

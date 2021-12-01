@@ -2,6 +2,7 @@ import 'dart:math' as Math;
 import 'package:flutter/material.dart';
 import 'package:linus_fortune_wheel/code_img_fortune_wheel/board_view.dart';
 import 'package:linus_fortune_wheel/code_img_fortune_wheel/luck_model.dart';
+import 'package:linus_fortune_wheel/configs/resources/app_res.dart';
 
 class PageCodeImgFortuneWheel extends StatefulWidget {
   const PageCodeImgFortuneWheel({Key? key}) : super(key: key);
@@ -12,6 +13,10 @@ class PageCodeImgFortuneWheel extends StatefulWidget {
 
 class _PageCodeImgFortuneWheelState extends State<PageCodeImgFortuneWheel>
   with SingleTickerProviderStateMixin {
+
+  Size get size => Size(MediaQuery.of(context).size.width,
+      MediaQuery.of(context).size.height);
+
   double _angle = 0;
   double _current = 0;
   late AnimationController _controller;
@@ -38,15 +43,6 @@ class _PageCodeImgFortuneWheelState extends State<PageCodeImgFortuneWheel>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.tealAccent, Colors.teal
-            ]
-          )
-        ),
         child: AnimatedBuilder(
           animation: _animation,
           builder: (context, child) {
@@ -55,6 +51,11 @@ class _PageCodeImgFortuneWheelState extends State<PageCodeImgFortuneWheel>
             return Stack(
               alignment: Alignment.center,
               children: [
+                Image.asset(AppRes.IMG_LOTTERY_BG,
+                  width: size.width,
+                  height: size.height,
+                  fit: BoxFit.cover,
+                ),
                 BoardView(angle: _angle, current: _current, items: _items),
                 _buildStartButton(),
                 _buildResult(_value)
@@ -68,18 +69,16 @@ class _PageCodeImgFortuneWheelState extends State<PageCodeImgFortuneWheel>
 
   Material _buildStartButton() {
     return Material(
-      color: Colors.white,
+      color: Colors.transparent,
       shape: CircleBorder(),
       child: InkWell(
         customBorder: CircleBorder(),
         child: Container(
           alignment: Alignment.center,
-          height: 72,
-          width: 72,
-          child: Text(
-            "GO",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
+          height: 108,
+          width: 108,
+          padding: EdgeInsets.only(bottom: 16),
+          child: Image.asset(AppRes.IMG_WHEEL_INDICATOR,)
         ),
         onTap: _animate,
       ),
